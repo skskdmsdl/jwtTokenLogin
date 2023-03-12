@@ -5,7 +5,10 @@ import com.chat.webSocket.exception.ErrorCode;
 import com.chat.webSocket.exception.WebSocketApplicationException;
 import com.chat.webSocket.member.model.entity.MemberEntity;
 import com.chat.webSocket.member.repository.MemberRepository;
+import com.chat.webSocket.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,20 +16,27 @@ import org.springframework.stereotype.Service;
 public class LoginService {
 
     private final MemberRepository memberRepository;
+    private final BCryptPasswordEncoder encoder;
+
+    @Value("${jwt.secret-key}")
+    private String secretKey;
+
+    @Value("${jwt.token.expired-time-ms}")
+    private Long expiredTimeMs;
 
     public String login(String memberId, String password) {
 
         // 회원가입 여부 체크
-        MemberEntity memberEntity = memberRepository.findByMemberId(memberId).orElseThrow(() -> new WebSocketApplicationException(ErrorCode.DUPLICATED_MEMBER_ID, ""));
+        MemberEntity memberEntity = memberRepository.findByMemberId(memberId).orElseThrow(() -> new WebSocketApplicationException(ErrorCode.MEMBER_NOT_FOUND, String.format("%s not founded", memberId)));
 
         // 비밀번호 체크
-        if(!memberEntity.getPassword().equals(password)) {
-            throw new WebSocketApplicationException(ErrorCode.DUPLICATED_MEMBER_ID, "");
+        if(!encoder.matches(password, memberEntity.getPassword())){
+            throw new WebSocketApplicationException(ErrorCode.INVALID_PASSWORD);
         }
 
         // 토큰 생성
+        String token = JwtTokenUtils.generateToken(memberId, secretKey, expiredTimeMs);
 
-
-        return "";
+        return token;
     }
 }

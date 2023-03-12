@@ -14,3 +14,8 @@ spring:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
     sql.init.mode: always
+
+jwt:
+  secret-key: chat.websocket-applicaion-2023.secret_key
+  # 30 days 24*60*60*30
+  token.expired-time-ms: 2592000000
