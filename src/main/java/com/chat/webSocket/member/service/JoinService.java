@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 @RequiredArgsConstructor
 public class JoinService {
@@ -16,6 +18,7 @@ public class JoinService {
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder encoder;
 
+    @Transactional
     public Member join(String memberId, String password) {
 
         // 회원가입하려는 memberId로 회원가입된 member가 있는지 (있다면 exception throw)
