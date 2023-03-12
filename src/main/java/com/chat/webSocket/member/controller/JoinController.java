@@ -20,7 +20,7 @@ public class JoinController {
 
     @PostMapping("")
     public Response<MemberJoinResponse> join(@RequestBody MemberJoinRequest request) {
-        Member member = joinService.join(request.getUserId(), request.getPassword());
+        Member member = joinService.join(request.getMemberId(), request.getPassword());
         return Response.success(MemberJoinResponse.fromMember(member));
     }
 }
