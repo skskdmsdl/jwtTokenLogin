@@ -6,6 +6,7 @@ import com.chat.webSocket.member.model.Member;
 import com.chat.webSocket.member.model.entity.MemberEntity;
 import com.chat.webSocket.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class JoinService {
 
     private final MemberRepository memberRepository;
+    private final BCryptPasswordEncoder encoder;
 
     public Member join(String memberId, String password) {
 
@@ -24,7 +26,7 @@ public class JoinService {
         // 회원가입 진행 - member 등록
         MemberEntity memberEntity = memberRepository.save(MemberEntity.builder()
                                                         .memberId(memberId)
-                                                        .password(password)
+                                                        .password(encoder.encode(password))
                                                         .build());
 
         return Member.fromEntity(memberEntity);
