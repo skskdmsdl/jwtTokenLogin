@@ -10,13 +10,13 @@ import lombok.Getter;
 public class MemberJoinResponse {
 
     private Long memberSno;
-    private String memberId;
+    private String email;
     private MemberRole role;
 
     public static MemberJoinResponse fromMember(Member member){
         return new MemberJoinResponse(
                 member.getMemberSno(),
-                member.getMemberName(),
+                member.getEmail(),
                 member.getRole()
         );
     }

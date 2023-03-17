@@ -24,10 +24,10 @@ public class LoginService {
     @Value("${jwt.token.expired-time-ms}")
     private Long expiredTimeMs;
 
-    public String login(String memberId, String password) {
+    public String login(String email, String password) {
 
         // 회원가입 여부 체크
-        MemberEntity memberEntity = memberRepository.findByMemberId(memberId).orElseThrow(() -> new WebSocketApplicationException(ErrorCode.MEMBER_NOT_FOUND, String.format("%s not founded", memberId)));
+        MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(() -> new WebSocketApplicationException(ErrorCode.MEMBER_NOT_FOUND, String.format("%s not founded", email)));
 
         // 비밀번호 체크
         if(!encoder.matches(password, memberEntity.getPassword())){
@@ -35,7 +35,7 @@ public class LoginService {
         }
 
         // 토큰 생성
-        String token = JwtTokenUtils.generateToken(memberId, secretKey, expiredTimeMs);
+        String token = JwtTokenUtils.generateToken(email, secretKey, expiredTimeMs);
 
         return token;
     }

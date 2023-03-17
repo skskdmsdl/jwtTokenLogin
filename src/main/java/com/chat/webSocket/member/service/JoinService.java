@@ -19,16 +19,16 @@ public class JoinService {
     private final BCryptPasswordEncoder encoder;
 
     @Transactional
-    public Member join(String memberId, String password) {
+    public Member join(String email, String password) {
 
-        // 회원가입하려는 memberId로 회원가입된 member가 있는지 (있다면 exception throw)
-        memberRepository.findByMemberId(memberId).ifPresent(it -> {
-            throw new WebSocketApplicationException(ErrorCode.DUPLICATED_MEMBER_ID, String.format("%s is duplicated", memberId));
+        // 회원가입하려는 email로 회원가입된 member가 있는지 (있다면 exception throw)
+        memberRepository.findByEmail(email).ifPresent(it -> {
+            throw new WebSocketApplicationException(ErrorCode.DUPLICATED_EMAIL, String.format("%s is duplicated", email));
         });
 
         // 회원가입 진행 - member 등록
         MemberEntity memberEntity = memberRepository.save(MemberEntity.builder()
-                                                        .memberId(memberId)
+                                                        .email(email)
                                                         .password(encoder.encode(password))
                                                         .build());
 

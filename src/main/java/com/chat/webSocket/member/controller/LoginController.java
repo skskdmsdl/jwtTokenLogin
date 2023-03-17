@@ -19,7 +19,7 @@ public class LoginController {
 
     @PostMapping("")
     public Response<MemberLoginResponse> login(@RequestBody MemberLoginRequest request) {
-        String token = loginService.login(request.getMemberId(), request.getPassword());
+        String token = loginService.login(request.getEmail(), request.getPassword());
         return Response.success(new MemberLoginResponse(token));
     }
 }

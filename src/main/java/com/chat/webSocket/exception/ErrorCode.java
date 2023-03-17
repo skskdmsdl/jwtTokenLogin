@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ErrorCode {
 
-    DUPLICATED_MEMBER_ID(HttpStatus.CONFLICT, "Member id is duplicated"),
+    DUPLICATED_EMAIL(HttpStatus.CONFLICT, "Email is duplicated"),
     MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "Member not founded"),
     INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "Password is invalid"),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Internal server error"),

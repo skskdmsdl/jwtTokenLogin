@@ -23,8 +23,8 @@ public class MemberEntity {
     @Column(name = "member_sno")
     private Long memberSno;
 
-    @Column(name = "member_id")
-    private String memberId;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "password")
     private String password;
@@ -33,6 +33,15 @@ public class MemberEntity {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private MemberRole role = MemberRole.USER;
+
+    @Column(name = "sns_name")
+    private String snsName;
+
+    @Column(name = "provider")
+    private String provider;
+
+    @Column(name = "provider_id")
+    private String providerId;
 
     @Column(name = "registered_at")
     private LocalDateTime registeredAt;
@@ -51,5 +60,5 @@ public class MemberEntity {
     void updated() {
         this.updatedAt = LocalDateTime.now();
     }
-    
+
 }

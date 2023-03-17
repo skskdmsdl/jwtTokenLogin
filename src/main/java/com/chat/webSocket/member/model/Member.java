@@ -12,9 +12,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Member {
     private Long memberSno;
-    private String memberName;
+    private String email;
     private String password;
     private MemberRole role;
+    private String snsName;
+    private String provider;
+    private String providerId;
     private LocalDateTime registeredAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
@@ -24,14 +27,16 @@ public class Member {
     public static Member fromEntity(MemberEntity entity) {
         return new Member(
                 entity.getMemberSno(),
-                entity.getMemberId(),
+                entity.getEmail(),
                 entity.getPassword(),
                 entity.getRole(),
+                entity.getSnsName(),
+                entity.getProvider(),
+                entity.getProviderId(),
                 entity.getRegisteredAt(),
                 entity.getUpdatedAt(),
                 entity.getDeletedAt()
         );
     }
-
 
 }
