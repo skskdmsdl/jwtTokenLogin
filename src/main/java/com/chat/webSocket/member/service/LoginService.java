@@ -3,17 +3,31 @@ package com.chat.webSocket.member.service;
 import com.chat.webSocket.WebSocketApplication;
 import com.chat.webSocket.exception.ErrorCode;
 import com.chat.webSocket.exception.WebSocketApplicationException;
+import com.chat.webSocket.member.model.Member;
 import com.chat.webSocket.member.model.entity.MemberEntity;
 import com.chat.webSocket.member.repository.MemberRepository;
 import com.chat.webSocket.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
+import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class LoginService {
+@Transactional
+public class LoginService extends OidcUserService implements UserDetailsService {
 
     private final MemberRepository memberRepository;
     private final BCryptPasswordEncoder encoder;
@@ -23,6 +37,12 @@ public class LoginService {
 
     @Value("${jwt.token.expired-time-ms}")
     private Long expiredTimeMs;
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return memberRepository.findByEmail(email).orElseThrow(
+                ()->new UsernameNotFoundException(email));
+    }
 
     public String login(String email, String password) {
 
@@ -39,4 +59,24 @@ public class LoginService {
 
         return token;
     }
+
+    @Override
+    public OidcUser loadUser(OidcUserRequest userRequest) throws OAuth2AuthenticationException {
+        return super.loadUser(userRequest);
+    }
+
+    public Member loadUser(final MemberEntity oauth2User){
+        MemberEntity memberEntity = memberRepository.findByProviderId(oauth2User.getProviderId()).orElseGet(()->{
+            // table 구성에 따른 save
+            return memberRepository.save(oauth2User);
+        });
+
+        return Member.fromEntity(memberEntity);
+    }
+
+    public String getSnsToken(String email){
+        String token = JwtTokenUtils.generateToken(email, secretKey, expiredTimeMs);
+        return token;
+    }
+
 }

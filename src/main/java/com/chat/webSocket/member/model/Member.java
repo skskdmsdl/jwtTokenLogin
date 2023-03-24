@@ -15,8 +15,8 @@ public class Member {
     private String email;
     private String password;
     private MemberRole role;
-    private String snsName;
-    private String provider;
+    private String name;
+    private MemberEntity.OAuth2Provider provider;
     private String providerId;
     private LocalDateTime registeredAt;
     private LocalDateTime updatedAt;
@@ -30,7 +30,7 @@ public class Member {
                 entity.getEmail(),
                 entity.getPassword(),
                 entity.getRole(),
-                entity.getSnsName(),
+                entity.getName(),
                 entity.getProvider(),
                 entity.getProviderId(),
                 entity.getRegisteredAt(),
