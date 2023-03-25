@@ -40,6 +40,9 @@ public class MemberEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private MemberRole role = MemberRole.USER;
 
+//    @Column(name = "authority")
+//    private AuthorityEntity authority;
+
     @Column(name = "name")
     private String name;
 
