@@ -125,4 +125,8 @@ public class MemberEntity implements UserDetails {
         public abstract MemberEntity convert(OAuth2User user);
     }
 
+    public void setAuthorities (Set<AuthorityEntity> authorities) {
+        this.authorities = authorities;
+    }
+
 }

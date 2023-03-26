@@ -34,6 +34,7 @@ public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
             // google
             MemberEntity oauth = MemberEntity.OAuth2Provider.google.convert((OidcUser) principal);
 //            Member member = loginService.loadUser(oauth);
+            Member member = loginService.loadUser(oauth);
             SecurityContextHolder.getContext().setAuthentication(
                     new UsernamePasswordAuthenticationToken(oauth, null, oauth.getAuthorities())
             );

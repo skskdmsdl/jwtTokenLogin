@@ -4,6 +4,7 @@ import com.chat.webSocket.WebSocketApplication;
 import com.chat.webSocket.exception.ErrorCode;
 import com.chat.webSocket.exception.WebSocketApplicationException;
 import com.chat.webSocket.member.model.Member;
+import com.chat.webSocket.member.model.entity.AuthorityEntity;
 import com.chat.webSocket.member.model.entity.MemberEntity;
 import com.chat.webSocket.member.repository.MemberRepository;
 import com.chat.webSocket.utils.JwtTokenUtils;
@@ -23,6 +24,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 
 @Service
 @RequiredArgsConstructor
@@ -65,9 +67,32 @@ public class LoginService extends OidcUserService implements UserDetailsService 
         return super.loadUser(userRequest);
     }
 
+    public MemberEntity save(MemberEntity memberEntity) {
+        return  memberRepository.save(memberEntity);
+    }
+
+    public void addAuthority(Long memberSno, String authority){
+        memberRepository.findById(memberSno).ifPresent(memberEntity->{
+            AuthorityEntity newRole = new AuthorityEntity(memberEntity.getMemberSno(), authority);
+            if(memberEntity.getAuthorities() == null){
+                HashSet<AuthorityEntity> authorities = new HashSet<>();
+                authorities.add(newRole);
+                memberEntity.setAuthorities(authorities);
+                save(memberEntity);
+            }else if(!memberEntity.getAuthorities().contains(newRole)){
+                HashSet<AuthorityEntity> authorities = new HashSet<>();
+                authorities.addAll(memberEntity.getAuthorities());
+                authorities.add(newRole);
+                memberEntity.setAuthorities(authorities);
+                save(memberEntity);
+            }
+        });
+    }
+
     public Member loadUser(final MemberEntity oauth2User){
         MemberEntity memberEntity = memberRepository.findByProviderId(oauth2User.getProviderId()).orElseGet(()->{
             // table 구성에 따른 save
+            addAuthority(oauth2User.getMemberSno(), "ROLE_USER");
             return memberRepository.save(oauth2User);
         });
 
