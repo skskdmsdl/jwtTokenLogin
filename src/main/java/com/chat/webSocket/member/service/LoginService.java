@@ -90,11 +90,14 @@ public class LoginService extends OidcUserService implements UserDetailsService 
     }
 
     public Member loadUser(final MemberEntity oauth2User){
-        MemberEntity memberEntity = memberRepository.findByProviderId(oauth2User.getProviderId()).orElseGet(()->{
-            // table 구성에 따른 save
-            addAuthority(oauth2User.getMemberSno(), "ROLE_USER");
-            return memberRepository.save(oauth2User);
-        });
+        MemberEntity memberEntity = memberRepository.save(oauth2User);
+        addAuthority(oauth2User.getMemberSno(), "ROLE_USER");
+//        MemberEntity memberEntity1 = memberRepository.findByProviderId(oauth2User.getProviderId()).get();
+//        MemberEntity memberEntity = memberRepository.findByProviderId(oauth2User.getProviderId()).orElseGet(()->{
+//            // table 구성에 따른 save
+//            addAuthority(oauth2User.getMemberSno(), "ROLE_USER");
+//            return memberRepository.save(oauth2User);
+//        });
 
         return Member.fromEntity(memberEntity);
     }
