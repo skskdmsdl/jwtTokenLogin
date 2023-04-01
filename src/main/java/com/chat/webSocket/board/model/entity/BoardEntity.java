@@ -8,10 +8,12 @@ import javax.persistence.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "board")
 @Getter
-@SQLDelete(sql = "UPDATE post SET deleted_at = NOW() where id=?")
+@SQLDelete(sql = "UPDATE board SET deleted_at = NOW() where id=?")
 @Where(clause = "deleted_at is NULL")
 public class BoardEntity {
 
@@ -24,6 +26,15 @@ public class BoardEntity {
 
     @Column(name = "body", columnDefinition = "TEXT") // columnDefinition = 컬럼 타입 변경
     private String body;
+
+    @Column(name = "registered_at")
+    private LocalDateTime registeredAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 
     // UserEntity에서 post를 가져올 때 user_id로 user 테이블과 join 해서 가져옴
     @ManyToOne // 하나의 유저가 여러 post 쓸 수 있음
