@@ -40,4 +40,15 @@ public class BoardEntity {
     @ManyToOne // 하나의 유저가 여러 post 쓸 수 있음
     @JoinColumn(name = "member_sno")
     private MemberEntity member;
+
+    @PrePersist
+    void registeredAt() {
+        this.registeredAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void updatedAt() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
 }
