@@ -22,7 +22,11 @@ public class BoardService {
     public void create(String email, String title, String body) {
         MemberEntity memberEntity = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new WebSocketApplicationException(ErrorCode.MEMBER_NOT_FOUND, String.format("email is %s", email)));
-//        BoardEntity boardEntity = BoardEntity.of(title, body, memberEntity);
-//        BoardRepository.save(boardEntity);
+
+        boardRepository.save(BoardEntity.builder()
+                .title(title)
+                .body(body)
+                .member(memberEntity)
+                .build());
     }
 }

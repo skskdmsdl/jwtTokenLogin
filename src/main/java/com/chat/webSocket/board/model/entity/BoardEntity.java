@@ -1,6 +1,7 @@
 package com.chat.webSocket.board.model.entity;
 
 import com.chat.webSocket.member.model.entity.MemberEntity;
+import lombok.Builder;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -49,6 +50,13 @@ public class BoardEntity {
     @PreUpdate
     void updatedAt() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    @Builder
+    public BoardEntity(String title, String body, MemberEntity member) {
+        this.title = title;
+        this.body = body;
+        this.member = member;
     }
 
 }
