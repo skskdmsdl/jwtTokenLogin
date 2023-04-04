@@ -1,5 +1,6 @@
 package com.chat.webSocket.member.model.entity;
 
+import com.chat.webSocket.member.model.Member;
 import com.chat.webSocket.member.model.MemberRole;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
@@ -18,8 +19,8 @@ import static java.lang.String.format;
 @Table(name = "member")
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
 @SQLDelete(sql = "UPDATE member SET deleted_at = NOW() where id = ?")
 @Where(clause = "deleted_at is NULL")
 public class MemberEntity implements UserDetails {

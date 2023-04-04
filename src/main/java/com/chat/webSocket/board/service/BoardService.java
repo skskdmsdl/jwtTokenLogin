@@ -1,5 +1,6 @@
 package com.chat.webSocket.board.service;
 
+import com.chat.webSocket.board.model.Board;
 import com.chat.webSocket.board.model.entity.BoardEntity;
 import com.chat.webSocket.board.repository.BoardRepository;
 import com.chat.webSocket.exception.ErrorCode;
@@ -7,6 +8,8 @@ import com.chat.webSocket.exception.WebSocketApplicationException;
 import com.chat.webSocket.member.model.entity.MemberEntity;
 import com.chat.webSocket.member.repository.MemberRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -28,5 +31,9 @@ public class BoardService {
                 .body(body)
                 .member(memberEntity)
                 .build());
+    }
+
+    public Page<Board> list(Pageable pageable) {
+        return boardRepository.findAll(pageable).map(Board::fromEntity);
     }
 }

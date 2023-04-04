@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import javax.persistence.*;
 
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -16,11 +17,12 @@ import java.time.LocalDateTime;
 @Getter
 @SQLDelete(sql = "UPDATE board SET deleted_at = NOW() where id=?")
 @Where(clause = "deleted_at is NULL")
+@NoArgsConstructor
 public class BoardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long board_sno;
+    private Long boardSno;
 
     @Column(name = "title")
     private String title;
@@ -58,5 +60,4 @@ public class BoardEntity {
         this.body = body;
         this.member = member;
     }
-
 }
