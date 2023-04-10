@@ -60,4 +60,10 @@ public class BoardEntity {
         this.body = body;
         this.member = member;
     }
+
+    // board 수정
+    public void updateBoard(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
 }
