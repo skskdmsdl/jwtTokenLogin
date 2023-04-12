@@ -1,8 +1,8 @@
-package com.chat.webSocket.config;
+package com.jwt.login.config;
 
-import com.chat.webSocket.member.model.Member;
-import com.chat.webSocket.member.model.entity.MemberEntity;
-import com.chat.webSocket.member.service.LoginService;
+import com.jwt.login.member.model.Member;
+import com.jwt.login.member.model.entity.MemberEntity;
+import com.jwt.login.member.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

@@ -1,10 +1,10 @@
-package com.chat.webSocket.member.controller;
+package com.jwt.login.member.controller;
 
-import com.chat.webSocket.member.controller.request.MemberLoginRequest;
-import com.chat.webSocket.member.controller.response.MemberLoginResponse;
-import com.chat.webSocket.member.model.Member;
-import com.chat.webSocket.member.service.LoginService;
-import com.chat.webSocket.utils.Response;
+import com.jwt.login.member.controller.request.MemberLoginRequest;
+import com.jwt.login.member.controller.response.MemberLoginResponse;
+import com.jwt.login.member.model.Member;
+import com.jwt.login.member.service.LoginService;
+import com.jwt.login.utils.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

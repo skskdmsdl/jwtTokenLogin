@@ -1,6 +1,6 @@
-package com.chat.webSocket.member.model;
+package com.jwt.login.member.model;
 
-import com.chat.webSocket.member.model.entity.MemberEntity;
+import com.jwt.login.member.model.entity.MemberEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;

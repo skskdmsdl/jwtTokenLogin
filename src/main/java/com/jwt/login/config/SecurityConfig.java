@@ -1,4 +1,4 @@
-package com.chat.webSocket.config;
+package com.jwt.login.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

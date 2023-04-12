@@ -1,4 +1,4 @@
-package com.chat.webSocket.member.model.entity;
+package com.jwt.login.member.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

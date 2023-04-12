@@ -1,6 +1,6 @@
-package com.chat.webSocket.board.repository;
+package com.jwt.login.board.repository;
 
-import com.chat.webSocket.board.model.entity.BoardEntity;
+import com.jwt.login.board.model.entity.BoardEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

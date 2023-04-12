@@ -1,7 +1,7 @@
-package com.chat.webSocket.config;
+package com.jwt.login.config;
 
-import com.chat.webSocket.config.filter.JwtTokenFilter;
-import com.chat.webSocket.member.service.MemberService;
+import com.jwt.login.config.filter.JwtTokenFilter;
+import com.jwt.login.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

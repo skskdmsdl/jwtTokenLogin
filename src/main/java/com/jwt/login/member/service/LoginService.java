@@ -1,13 +1,12 @@
-package com.chat.webSocket.member.service;
+package com.jwt.login.member.service;
 
-import com.chat.webSocket.WebSocketApplication;
-import com.chat.webSocket.exception.ErrorCode;
-import com.chat.webSocket.exception.WebSocketApplicationException;
-import com.chat.webSocket.member.model.Member;
-import com.chat.webSocket.member.model.entity.AuthorityEntity;
-import com.chat.webSocket.member.model.entity.MemberEntity;
-import com.chat.webSocket.member.repository.MemberRepository;
-import com.chat.webSocket.utils.JwtTokenUtils;
+import com.jwt.login.exception.ErrorCode;
+import com.jwt.login.exception.JwtLoginApplicationException;
+import com.jwt.login.member.model.Member;
+import com.jwt.login.member.model.entity.AuthorityEntity;
+import com.jwt.login.member.model.entity.MemberEntity;
+import com.jwt.login.member.repository.MemberRepository;
+import com.jwt.login.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,11 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserRequest;
 import org.springframework.security.oauth2.client.oidc.userinfo.OidcUserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -49,11 +45,11 @@ public class LoginService extends OidcUserService implements UserDetailsService 
     public String login(String email, String password) {
 
         // 회원가입 여부 체크
-        MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(() -> new WebSocketApplicationException(ErrorCode.MEMBER_NOT_FOUND, String.format("%s not founded", email)));
+        MemberEntity memberEntity = memberRepository.findByEmail(email).orElseThrow(() -> new JwtLoginApplicationException(ErrorCode.MEMBER_NOT_FOUND, String.format("%s not founded", email)));
 
         // 비밀번호 체크
         if(!encoder.matches(password, memberEntity.getPassword())){
-            throw new WebSocketApplicationException(ErrorCode.INVALID_PASSWORD);
+            throw new JwtLoginApplicationException(ErrorCode.INVALID_PASSWORD);
         }
 
         // 토큰 생성

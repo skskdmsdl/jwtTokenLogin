@@ -1,9 +1,9 @@
-package com.chat.webSocket.board.controller;
+package com.jwt.login.board.controller;
 
-import com.chat.webSocket.board.controller.request.BoardCreateRequest;
-import com.chat.webSocket.board.controller.response.BoardResponse;
-import com.chat.webSocket.board.service.BoardService;
-import com.chat.webSocket.utils.Response;
+import com.jwt.login.board.controller.request.BoardCreateRequest;
+import com.jwt.login.board.controller.response.BoardResponse;
+import com.jwt.login.board.service.BoardService;
+import com.jwt.login.utils.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

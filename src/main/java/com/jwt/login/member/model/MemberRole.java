@@ -1,4 +1,4 @@
-package com.chat.webSocket.member.model;
+package com.jwt.login.member.model;
 
 public enum MemberRole {
 

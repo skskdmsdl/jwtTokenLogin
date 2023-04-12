@@ -1,6 +1,6 @@
-package com.chat.webSocket.board.model.entity;
+package com.jwt.login.board.model.entity;
 
-import com.chat.webSocket.member.model.entity.MemberEntity;
+import com.jwt.login.member.model.entity.MemberEntity;
 import lombok.Builder;
 import lombok.Getter;
 

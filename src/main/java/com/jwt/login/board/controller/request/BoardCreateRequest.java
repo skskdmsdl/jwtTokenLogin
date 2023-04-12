@@ -1,4 +1,4 @@
-package com.chat.webSocket.board.controller.request;
+package com.jwt.login.board.controller.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

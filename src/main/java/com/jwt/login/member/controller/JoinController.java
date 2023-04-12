@@ -1,10 +1,10 @@
-package com.chat.webSocket.member.controller;
+package com.jwt.login.member.controller;
 
-import com.chat.webSocket.member.controller.request.MemberJoinRequest;
-import com.chat.webSocket.member.controller.response.MemberJoinResponse;
-import com.chat.webSocket.member.model.Member;
-import com.chat.webSocket.member.service.JoinService;
-import com.chat.webSocket.utils.Response;
+import com.jwt.login.member.controller.request.MemberJoinRequest;
+import com.jwt.login.member.controller.response.MemberJoinResponse;
+import com.jwt.login.member.model.Member;
+import com.jwt.login.member.service.JoinService;
+import com.jwt.login.utils.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

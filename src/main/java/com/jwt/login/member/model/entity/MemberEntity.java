@@ -1,7 +1,6 @@
-package com.chat.webSocket.member.model.entity;
+package com.jwt.login.member.model.entity;
 
-import com.chat.webSocket.member.model.Member;
-import com.chat.webSocket.member.model.MemberRole;
+import com.jwt.login.member.model.MemberRole;
 import lombok.*;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;

@@ -1,4 +1,4 @@
-package com.chat.webSocket.utils;
+package com.jwt.login.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

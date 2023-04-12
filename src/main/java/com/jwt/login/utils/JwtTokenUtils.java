@@ -1,4 +1,4 @@
-package com.chat.webSocket.utils;
+package com.jwt.login.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

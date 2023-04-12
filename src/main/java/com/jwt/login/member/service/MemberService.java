@@ -1,7 +1,6 @@
-package com.chat.webSocket.member.service;
+package com.jwt.login.member.service;
 
-import com.chat.webSocket.exception.ErrorCode;
-import com.chat.webSocket.member.model.Member;
+import com.jwt.login.member.model.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,7 @@
-package com.chat.webSocket.member.controller.response;
+package com.jwt.login.member.controller.response;
 
-import com.chat.webSocket.member.model.Member;
-import com.chat.webSocket.member.model.MemberRole;
-import com.chat.webSocket.member.model.entity.MemberEntity;
+import com.jwt.login.member.model.Member;
+import com.jwt.login.member.model.MemberRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

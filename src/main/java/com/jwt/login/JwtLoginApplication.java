@@ -1,14 +1,13 @@
-package com.chat.webSocket;
+package com.jwt.login;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
-public class WebSocketApplication {
+public class JwtLoginApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WebSocketApplication.class, args);
+		SpringApplication.run(JwtLoginApplication.class, args);
 	}
 
 }

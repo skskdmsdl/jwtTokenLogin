@@ -1,6 +1,6 @@
-package com.chat.webSocket.exception;
+package com.jwt.login.exception;
 
-import com.chat.webSocket.utils.Response;
+import com.jwt.login.utils.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalControllerAdvice {
 
-    @ExceptionHandler(WebSocketApplicationException.class)
-    public ResponseEntity<?> applicationHandler(WebSocketApplicationException e) {
+    @ExceptionHandler(JwtLoginApplicationException.class)
+    public ResponseEntity<?> applicationHandler(JwtLoginApplicationException e) {
         log.error("Error occurs {}", e.toString());
         return ResponseEntity.status(e.getErrorCode().getStatus())
                 .body(Response.error(e.getErrorCode().name()));

@@ -1,8 +1,8 @@
-package com.chat.webSocket.config.filter;
+package com.jwt.login.config.filter;
 
-import com.chat.webSocket.member.model.Member;
-import com.chat.webSocket.member.service.MemberService;
-import com.chat.webSocket.utils.JwtTokenUtils;
+import com.jwt.login.member.model.Member;
+import com.jwt.login.member.service.MemberService;
+import com.jwt.login.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;

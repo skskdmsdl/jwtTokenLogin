@@ -1,4 +1,4 @@
-package com.chat.webSocket.member.controller;
+package com.jwt.login.member.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
