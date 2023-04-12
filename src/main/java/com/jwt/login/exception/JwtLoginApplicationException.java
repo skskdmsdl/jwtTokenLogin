@@ -1,6 +1,5 @@
-package com.chat.webSocket.exception;
+package com.jwt.login.exception;
 
-import com.chat.webSocket.WebSocketApplication;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
