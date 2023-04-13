@@ -46,10 +46,6 @@ public class AuthenticationConfig {
                 .addFilterBefore(new JwtTokenFilter(key, memberService), UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login()
                 .successHandler(successHandler)
-//                .loginPage("/login/sns")
-//                .defaultSuccessUrl("/login")
-//                .userInfoEndpoint()
-//                .userService(oAuth2UserService)
                 ;
         return http.build();
     }
