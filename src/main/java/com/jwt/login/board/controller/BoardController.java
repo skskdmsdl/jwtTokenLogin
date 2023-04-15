@@ -1,7 +1,9 @@
 package com.jwt.login.board.controller;
 
 import com.jwt.login.board.controller.request.BoardCreateRequest;
+import com.jwt.login.board.controller.request.BoardModifyRequest;
 import com.jwt.login.board.controller.response.BoardResponse;
+import com.jwt.login.board.model.Board;
 import com.jwt.login.board.service.BoardService;
 import com.jwt.login.utils.Response;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +28,11 @@ public class BoardController {
     @GetMapping
     public Response<Page<BoardResponse>> list(Pageable pageable, Authentication authentication) {
         return Response.success(boardService.list(pageable).map(BoardResponse::fromBoard));
+    }
+
+    @PutMapping("/{postId}")
+    public Response<BoardResponse> modify(@PathVariable Integer postId, @RequestBody BoardModifyRequest request, Authentication authentication) {
+        Board board = boardService.modify(request.getTitle(), request.getBody(), authentication.getName(), postId);
+        return Response.success(BoardResponse.fromBoard(board));
     }
 }

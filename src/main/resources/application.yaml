@@ -14,6 +14,13 @@ spring:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
     sql.init.mode: always
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 107336406920-qj6vo7aku3a7v98uml21ibe9ut9bcdv2.apps.googleusercontent.com
+            clientSecret: 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
 
 jwt:
   secret-key: chat.websocket-applicaion-2023.secret_key

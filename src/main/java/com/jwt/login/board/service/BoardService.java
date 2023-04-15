@@ -36,4 +36,19 @@ public class BoardService {
     public Page<Board> list(Pageable pageable) {
         return boardRepository.findAll(pageable).map(Board::fromEntity);
     }
+
+    public Board modify(String title, String body, String email, Integer boardId) {
+        MemberEntity memberEntity = getMemberEntityOrException(email);
+        // board exist
+        BoardEntity boardEntity = getBoardEntityOrException(boardId);
+
+        // board permission
+        if(boardEntity.getMember() != memberEntity) {
+            throw new JwtLoginApplicationException(ErrorCode.INVALID_PERMISSION, String.format("%s has no permission with %s", email, boardId));
+        }
+
+        boardEntity.updateBoard(title, body);
+
+        return  Board.fromEntity(boardEntityRepository.saveAndFlush(boardEntity));
+    }
 }
