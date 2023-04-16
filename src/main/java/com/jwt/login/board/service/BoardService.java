@@ -37,7 +37,7 @@ public class BoardService {
         return boardRepository.findAll(pageable).map(Board::fromEntity);
     }
 
-    public Board modify(String title, String body, String email, Integer boardId) {
+    public Board modify(String title, String body, String email, Long boardId) {
         MemberEntity memberEntity = getMemberEntityOrException(email);
         // board exist
         BoardEntity boardEntity = getBoardEntityOrException(boardId);
@@ -49,6 +49,16 @@ public class BoardService {
 
         boardEntity.updateBoard(title, body);
 
-        return  Board.fromEntity(boardEntityRepository.saveAndFlush(boardEntity));
+        return  Board.fromEntity(boardRepository.saveAndFlush(boardEntity));
+    }
+
+    private MemberEntity getMemberEntityOrException(String email) {
+        return memberRepository.findByEmail(email).orElseThrow(() ->
+                new JwtLoginApplicationException(ErrorCode.MEMBER_NOT_FOUND, String.format("%s not founded", email)));
+    }
+
+    private BoardEntity getBoardEntityOrException(Long boardSno) {
+        return boardRepository.findById(boardSno).orElseThrow(() ->
+                new JwtLoginApplicationException(ErrorCode.BOARD_NOT_FOUND, String.format("%s not founded", boardSno)));
     }
 }

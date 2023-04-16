@@ -31,8 +31,8 @@ public class BoardController {
     }
 
     @PutMapping("/{postId}")
-    public Response<BoardResponse> modify(@PathVariable Integer postId, @RequestBody BoardModifyRequest request, Authentication authentication) {
-        Board board = boardService.modify(request.getTitle(), request.getBody(), authentication.getName(), postId);
+    public Response<BoardResponse> modify(@PathVariable Long boardId, @RequestBody BoardModifyRequest request, Authentication authentication) {
+        Board board = boardService.modify(request.getTitle(), request.getBody(), authentication.getName(), boardId);
         return Response.success(BoardResponse.fromBoard(board));
     }
 }
