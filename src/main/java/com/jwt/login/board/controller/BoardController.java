@@ -30,9 +30,16 @@ public class BoardController {
         return Response.success(boardService.list(pageable).map(BoardResponse::fromBoard));
     }
 
-    @PutMapping("/{postId}")
+    @PutMapping("/{boardId}")
     public Response<BoardResponse> modify(@PathVariable Long boardId, @RequestBody BoardModifyRequest request, Authentication authentication) {
         Board board = boardService.modify(request.getTitle(), request.getBody(), authentication.getName(), boardId);
         return Response.success(BoardResponse.fromBoard(board));
     }
+
+    @DeleteMapping("/{boardId}")
+    public Response<Void> delete(@PathVariable Long boardId, Authentication authentication) {
+        boardService.delete(authentication.getName(), boardId);
+        return Response.success();
+    }
+
 }
